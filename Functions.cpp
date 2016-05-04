@@ -13,6 +13,7 @@ Functions::Functions()
     human = GameData("Exiled Human", 40, 15, 3, 0, 15, 0);
     demon = GameData("Demon", 70, 30, 4, 0, 30, 0);
     dragon = GameData("Dragon", 150, 50, 7, 0, 50, 0);
+    spider = GameData("Spider", 15, 2, 1, 0, 8, 0);
     stat = GameStats(5, 3, 0, 5, 3);
     srand(time(NULL));
 
@@ -45,8 +46,9 @@ int Functions::menu(std::string items[], int length){
 
 GameData Functions::randMonster(){
     int rm = rand() % 100 + 1;
-    if(rm <= 30) return slime;
-    else if(30 < rm && rm <= 53) return zombie;
+    if(rm <= 15) return slime;
+    else if(15 < rm && rm <= 35) return spider;
+    else if(35 < rm && rm <= 53) return zombie;
     else if(53 < rm && rm <= 70) return skele;
     else if(70 < rm && rm <= 85) return human;
     else if(85 < rm && rm <= 95) return demon;
@@ -114,6 +116,7 @@ void Functions::monsterDamage(GameData mstr){
     if(damage < 0) damage = 0;
     std::cout << "The " << mstr.name << " did " << damage << " damage to you." << std::endl;
     player.health = player.health - damage;
+    if (damage != 0) player.armor++;
 }
 
 int Functions::fightMonster(GameData monster){
